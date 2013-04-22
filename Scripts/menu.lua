@@ -250,13 +250,11 @@ function selectAI(k)
 		menuButtons[k].selected = true
 		chosenAIs[k] = k
 		if not menuTrainImages[k] then
-			print("starting thread...selectAI", k .. ".lua")
-			col = generateColour(k, 1)
+			print("starting thread...selectAI", k)
 			trainImageThreads[k] = love.thread.newThread("menuTraimImageThread" .. totalNumImageThreads, "Scripts/renderTrainImage.lua")
 			totalNumImageThreads = totalNumImageThreads + 1
 			trainImageThreads[k]:start()
 			trainImageThreads[k]:set("seed", k)
-			trainImageThreads[k]:set("colour", TSerial.pack(col))
 			currentNumImageThreads = currentNumImageThreads + 1
 		else
 			table.insert( menuIcons,  {img = menuTrainImages[k], angle=math.pi/3, x = menuButtons[k].x +  menuButtons[k].imageOff:getWidth()+15, y = menuButtons[k].y - 5, index = k})
