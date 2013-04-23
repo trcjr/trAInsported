@@ -19,6 +19,7 @@ startCoordinateX = thisThread:demand("startCoordinateX")
 startCoordinateY = thisThread:demand("startCoordinateY")
 region = thisThread:get("region")
 seed = thisThread:demand("seed") + startCoordinateX + startCoordinateY
+NO_TREES = thisThread:get("NO_TREES")
 
 function checkAborted()
 	if abort then

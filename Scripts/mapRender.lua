@@ -156,6 +156,7 @@ while true do
 							parts[i][j].thread:set("startCoordinateY", (j-1)*partHeight)
 							parts[i][j].thread:set("region", curMap.region)
 							parts[i][j].thread:set("seed", curMap.seed)
+							parts[i][j].thread:set("NO_TREES", NO_TREES)
 							numThreadsRunning = numThreadsRunning + 1
 						end
 					end
