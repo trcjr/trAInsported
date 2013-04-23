@@ -1,0 +1,96 @@
+<project name="trAInsported" default="dist" basedir=".">
+    <description>
+        simple example build file
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+  <property name="download_dir" location="${build}/downloads"/>
+  <property name="love.version" value="0.8.0"/>
+
+  <macrodef name="download_love">
+    <attribute name="version"/>
+    <attribute name="os"/>
+    <attribute name="arch"/>
+    <sequential>
+      <get dest="${download_dir}" skipexisting="true">
+        <url url="http://cdn.bitbucket.org/rude/love/downloads/love-@{version}-@{os}-@{arch}.zip"/>
+      </get>
+    </sequential>
+  </macrodef>
+
+  <macrodef name="build_exe_package">
+    <attribute name="version"/>
+    <attribute name="arch"/>
+    <sequential>
+      <property name="build_file_name" value="${ant.project.name}-${DSTAMP}"/>
+      <mkdir dir="${build}/${ant.project.name}-win-@{arch}"/>
+      <delete file="${build}/${build_file_name}-win-@{arch}.exe"/>
+
+      <concat destfile="${build}/${ant.project.name}-win-@{arch}/${ant.project.name}-win-@{arch}.exe" append="true" binary="true">
+        <filelist dir="${build}/love-@{version}-win-@{arch}" files="love.exe"/>
+        <filelist dir="${dist}" files="${build_file_name}.love"/>
+      </concat>
+
+      <copy todir="${build}/${ant.project.name}-win-@{arch}">
+        <fileset dir="${build}/love-@{version}-win-@{arch}">
+          <include name="**/*.dll"/>
+        </fileset>
+      </copy>
+
+      <zip destfile="${build_file_name}-win-@{arch}.zip" basedir="${build}/${ant.project.name}-win-@{arch}" />
+    </sequential>
+  </macrodef>
+
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+    <mkdir dir="${download_dir}"/>
+  </target>
+
+
+  <target name="download" depends="init" description="Download things">
+      <download_love version="${love.version}" os="win" arch="x86" />
+      <download_love version="${love.version}" os="win" arch="x64" />
+  </target>
+
+  <target name="compile" depends="init" description="compile the source">
+
+
+      <unzip src="${download_dir}/love-${love.version}-win-x64.zip" dest="${build}"/>
+      <unzip src="${download_dir}/love-${love.version}-win-x86.zip" dest="${build}"/>
+
+      <!-- Copy stuff to the build dir -->
+      <copy todir="${build}/${ant.project.name}">
+        <fileset dir=".">
+          <exclude name="**/dist/**"/>
+          <exclude name="**/build/**"/>
+          <exclude name="**/.git/**"/>
+          <exclude name="build.xml"/>
+        </fileset>
+      </copy>
+  </target>
+
+  <target name="dist" depends="download,compile" description="generate the distribution" >
+
+    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+    <property name="build_file_name" value="${dist}/${ant.project.name}-${DSTAMP}"/>
+
+    <zip destfile="${build_file_name}.love" basedir="${build}/${ant.project.name}"/>
+
+    <build_exe_package version="${love.version}" arch="x86"/>
+    <build_exe_package version="${love.version}" arch="x64"/>
+
+  </target>
+
+  <target name="clean" description="clean up">
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+
+</project>
