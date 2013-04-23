@@ -84,6 +84,12 @@ function loadConfiguration()
 	if clouds == "false" then
 		RENDER_CLOUDS = false
 	end
+
+	if configFile.getValue("use_monospace_fonts") == "true" then
+		USE_MONOSPACE_FONTS = true
+	else
+		USE_MONOSPACE_FONTS = false
+	end
 end
 
 

@@ -72,6 +72,10 @@ LNG.menu_clouds_off_tooltip = [[Click to disable cloud rendering.]]
 LNG.menu_settings_language = [[Language:]]
 LNG.menu_settings_language_tooltip1 = [[Click to switch game language to]]	-- before lang name
 LNG.menu_settings_language_tooltip2 = [[]]	-- after lang name
+LNG.menu_use_monospacefonts_on = [[Mono Fonts]]
+LNG.menu_use_monospacefonts_off = [[Normal Fonts]]
+LNG.menu_use_monospacefonts_off_tooltip = "Not using monospace fonts"
+LNG.menu_use_monospacefonts_on_tooltip = "Using monospace fonts"
 
 -- Menu errors:
 LNG.menu_err_min_ai = [[Need to choose at least one AI!]]

@@ -554,6 +554,34 @@ function toggleOptionClouds(enable)
 	menu.settings() -- re-initialise the menu.
 end
 
+function toggleOptionMonospaceFonts(enable)
+	if enable then
+		USE_MONOSPACE_FONTS = true
+	else
+		USE_MONOSPACE_FONTS = false
+	end
+
+	configFile.setValue("use_monospace_fonts", enable)
+	setupFonts()
+	menu.settings() -- re-initialise the menu.
+end
+
+function selectLanguage(lang)
+	print("Loading language file: Languages/" .. lang .. ".lua")
+	ok, chunk = pcall(love.filesystem.load, "Languages/" .. lang .. ".lua")
+	if ok then
+		setupFonts()	-- reset them all incase the previous language changed them!
+		ok, msg = pcall(chunk)
+		if ok then	
+			CURRENT_LANGUAGE = lang
+			return true
+		else
+			print(msg)
+		end
+	else
+		print(chunk)
+	end
+end
 
 function menu.languageChosen(lang)
 print("Attempt to load new language:", lang)
@@ -605,6 +633,13 @@ function menu.settings()
 		menuButtons["optionClouds"] = button:newSmall(x, y, LNG.menu_clouds_on, toggleOptionClouds, false, nil, nil, LNG.menu_clouds_off_tooltip)
 	else
 		menuButtons["optionClouds"] = button:newSmall(x, y, LNG.menu_clouds_off, toggleOptionClouds, true, nil, nil, LNG.menu_clouds_on_tooltip)
+	end
+
+	y = y + bgBoxSmall:getHeight()+5
+	if USE_MONOSPACE_FONTS then
+		menuButtons["optionMonospaceFonts"] = button:newSmall(x, y, LNG.menu_use_monospacefonts_on, toggleOptionMonospaceFonts, false, nil, nil, LNG.menu_use_monospacefonts_off_tooltip)
+	else
+		menuButtons["optionMonospaceFonts"] = button:newSmall(x, y, LNG.menu_use_monospacefonts_off, toggleOptionMonospaceFonts, true, nil, nil, LNG.menu_use_monospacefonts_on_tooltip)
 	end
 	
 	x = defaultMenuX + 200 + columnWidth*2

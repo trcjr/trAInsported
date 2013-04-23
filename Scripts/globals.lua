@@ -16,24 +16,36 @@ MAIN_SERVER_IP = "trainsportedgame.no-ip.org"
 PORT = 5556
 
 --
-
 if not DEDICATED then
 
-	function setupFonts() -- in a seperate function to make sure they can be redefined when languages are changed.
-		FONT_BUTTON = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 19 )
-		FONT_BUTTON_SMALL = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 16 )
-		FONT_STANDARD = love.graphics.newFont("UbuntuFont/Ubuntu-B.ttf", 15 )
-		FONT_STAT_HEADING = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf",18 )
-		FONT_STAT_MSGBOX = love.graphics.newFont( "UbuntuFont/Ubuntu-M.ttf",17 )
-		FONT_CONSOLE = love.graphics.newFont( "UbuntuFont/Ubuntu-R.ttf", 13)
-		FONT_SMALL = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 14)
-		FONT_COORDINATES = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 25 )
-		FONT_HUGE = FONT_COORDINATES
+function setupFonts() -- in a seperate function to make sure they can be redefined when languages are changed.
+	FONT_BUTTON = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 19 )
+	FONT_BUTTON_SMALL = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 16 )
+	FONT_STANDARD = love.graphics.newFont("UbuntuFont/Ubuntu-B.ttf", 15 )
+	FONT_STAT_HEADING = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf",18 )
+	FONT_STAT_MSGBOX = love.graphics.newFont( "UbuntuFont/Ubuntu-M.ttf",17 )
+	FONT_CONSOLE = love.graphics.newFont( "UbuntuFont/Ubuntu-R.ttf", 13)
+	FONT_SMALL = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 14)
+	FONT_COORDINATES = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 25 )
+	FONT_HUGE = FONT_COORDINATES
 	
-		FONT_CODE_PLAIN = love.graphics.newFont( "UbuntuFont/Ubuntu-M.ttf", 17 )
-		FONT_CODE_BOLD = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 17 )
-		FONT_CODE_COMMENT = love.graphics.newFont( "UbuntuFont/Ubuntu-LI.ttf", 17 )
+	FONT_CODE_PLAIN = love.graphics.newFont( "UbuntuFont/Ubuntu-M.ttf", 17 )
+	FONT_CODE_BOLD = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 17 )
+	FONT_CODE_COMMENT = love.graphics.newFont( "UbuntuFont/Ubuntu-LI.ttf", 17 )
+
+	if USE_MONOSPACE_FONTS then
+		FONT_BUTTON = love.graphics.newFont( "UbuntuFont/UbuntuMono-B.ttf", 19 )
+		FONT_BUTTON_SMALL = love.graphics.newFont( "UbuntuFont/UbuntuMono-B.ttf", 16 )
+		FONT_STANDARD = love.graphics.newFont("UbuntuFont/UbuntuMono-B.ttf", 15 )
+		FONT_STAT_HEADING = love.graphics.newFont( "UbuntuFont/UbuntuMono-B.ttf",18 )
+		FONT_STAT_MSGBOX = love.graphics.newFont( "UbuntuFont/Ubuntu-M.ttf",17 )
+		FONT_CONSOLE = love.graphics.newFont( "UbuntuFont/UbuntuMono-R.ttf", 13)
+		FONT_SMALL = love.graphics.newFont( "UbuntuFont/UbuntuMono-B.ttf", 14)
+		FONT_COORDINATES = love.graphics.newFont( "UbuntuFont/UbuntuMono-B.ttf", 25 )
+		FONT_HUGE = FONT_COORDINATES
+		FONT_CODE_BOLD = love.graphics.newFont( "UbuntuFont/UbuntuMono-B.ttf", 17 )
 	end
+end
 
 
 	PLAYERCOLOUR1 = {r=255,g=50,b=50}
@@ -126,6 +138,7 @@ RESOLUTIONS[#RESOLUTIONS+1] = {width=1920, height=1200}
 RESOLUTIONS[#RESOLUTIONS+1] = {width=2048, height=1536}
 
 RENDER_CLOUDS = true
+USE_MONOSPACE_FONTS = false
 
 
 -- tutorial:
