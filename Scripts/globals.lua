@@ -28,7 +28,7 @@ function setupFonts() -- in a seperate function to make sure they can be redefin
 	FONT_SMALL = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 14)
 	FONT_COORDINATES = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 25 )
 	FONT_HUGE = FONT_COORDINATES
-	
+
 	FONT_CODE_PLAIN = love.graphics.newFont( "UbuntuFont/Ubuntu-M.ttf", 17 )
 	FONT_CODE_BOLD = love.graphics.newFont( "UbuntuFont/Ubuntu-B.ttf", 17 )
 	FONT_CODE_COMMENT = love.graphics.newFont( "UbuntuFont/Ubuntu-LI.ttf", 17 )
@@ -63,13 +63,13 @@ end
 	LOGO_IMG = love.graphics.newImage("Images/Logo.png")
 	checkmarkImage = love.graphics.newImage("Images/CheckMark.png")
 	failedImage = love.graphics.newImage("Images/Cross.png")
-	
+
 else
 	TIME_BETWEEN_MATCHES = 60
 	FALLBACK_ROUND_TIME = 300
-	
+
 	MYSQL_DATABASE = "trAInsported"
-	
+
 	function setupFonts() end
 end
 
