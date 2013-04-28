@@ -147,10 +147,6 @@ function runMap(restart)
 		
 		passenger.init ( maxPassengers )		-- start generating random passengers, set the maximum number of them.
 		
-		if challengeEvents.mapRenderingDoneCallback then
-			challengeEvents.mapRenderingDoneCallback()
-		end
-		
 		-- If there's a tutorial callback registered by the current map, then start that now!
 		if tutorial then
 			if not restart and tutorial.mapRenderingDoneCallback then
@@ -161,6 +157,10 @@ function runMap(restart)
 		end
 		
 		ai.init()
+		
+		if challengeEvents.mapRenderingDoneCallback then
+			challengeEvents.mapRenderingDoneCallback()
+		end
 		 
 		if not DEDICATED then
 			if RENDER_CLOUDS then
@@ -291,7 +291,7 @@ local mapRenderThreadNumber = 0
 function map.generate(width, height, seed, tutorialMap)
 	if not map.generating() then
 	
-		if file_exists("log.txt") then
+		if file_exists("log.txt") and DEBUG then
 			local f = io.open("log.txt", "w")
 			f:write("")
 			f:close()
